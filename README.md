@@ -145,9 +145,9 @@ const int ledMerah = 11;           // LED merah = parkir penuh (FULL)
 ```
 
 **Logika Indikator:**
-- ✅ **LED Hijau MENYALA** = Slot masih tersedia, kendaraan boleh masuk
-- 🔴 **LED Merah MENYALA** = Parkir penuh, tidak ada slot kosong
-- 📟 **Pada Mode Darurat** = LED merah berkedip dengan frekuensi 300ms
+- **LED Hijau MENYALA** = Slot masih tersedia, kendaraan boleh masuk
+- **LED Merah MENYALA** = Parkir penuh, tidak ada slot kosong
+- **Pada Mode Darurat** = LED merah berkedip dengan frekuensi 300ms
 
 ---
 
@@ -179,8 +179,8 @@ int kapasitasMaks = 5;             // Kapasitas maksimal parkir
 **Logika Slot:**
 - Saat kendaraan masuk: `slotTersedia--` (berkurang 1)
 - Saat kendaraan keluar: `slotTersedia++` (bertambah 1)
-- Jika `slotTersedia <= 0`: Parkir penuh ❌
-- Jika `slotTersedia > 0`: Slot tersedia ✅
+- Jika `slotTersedia <= 0`: Parkir penuh 
+- Jika `slotTersedia > 0`: Slot tersedia 
 - Reset: `slotTersedia = kapasitasMaks`
 
 ---
