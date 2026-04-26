@@ -2,6 +2,11 @@
 
 **Sistem Indikator Parkir Otomatis** adalah sebuah sistem manajemen parkir yang dirancang untuk mengotomatisasi proses masuk dan keluar kendaraan dari area parkir. Sistem ini menggunakan Arduino sebagai mikrokontroler utama dengan berbagai sensor dan aktuator untuk mendeteksi dan mengontrol arus kendaraan.
 
+Link Tinkercad : 
+https://www.tinkercad.com/things/dYwf132GiWC-sistem-indikator-kapasitas-parkir-otomatis?sharecode=lcrc7gmavFSwcXQfQI9msCLo-CvpQElX4j-LYubi71M 
+
+Link Video : https://youtu.be/kXOhVmy5K78
+
 ### Fitur Utama:
 - Deteksi kendaraan otomatis menggunakan sensor ultrasonik
 - Pembuka palang otomatis saat kendaraan terdeteksi
