@@ -11,6 +11,7 @@
 - Lampu otomatis berdasarkan sensor cahaya (LDR)
 - Kontrol manual menggunakan tombol push button
 - Mode darurat untuk evakuasi cepat
+- Pembaruan kuota slot parkir secara manual melalui Serial Monitor (+, -, r)
 
 ---
 
@@ -166,6 +167,7 @@ const int tombolKeluar = A2;       // Tombol kontrol manual keluar
 - **lampu pada Pin 3**: Menggunakan PWM untuk kontrol brightness (0-255)
 - **ldrPin (A0)**: Membaca nilai analog (0-1023) untuk deteksi cahaya
 - **tombolDarurat pada Pin 2**: Mendukung external interrupt (FALLING edge triggered)
+- **INPUT_PULLUP**: Semua pin tombol diinisialisasi menggunakan resistor internal INPUT_PULLUP. Tombol akan membaca nilai HIGH saat diam, dan membaca LOW saat ditekan (dihubungkan ke Ground).
 
 ---
 
@@ -419,6 +421,24 @@ void tampilkanStatus() {
 }
 ```
 
+---
+
+
+### 4. Fungsi Pembaruan Slot via Serial Monitor
+
+```cpp
+if (Serial.available() > 0) {
+  char cmd = Serial.read();
+  if (cmd == '+') { /* Tambah slot tersedia manual */ }
+  if (cmd == '-') { /* Kurangi slot tersedia manual */ }
+  if (cmd == 'r') { /* Reset slot ke nilai maksimum */ }
+}
+```
+
+**Penjelasan:**
+Blok kode ini berfungsi sebagai "Panel Admin" virtual. Perintah `Serial.available()` > 0 memeriksa apakah ada input karakter yang masuk dari komputer/laptop yang terhubung via kabel USB. `Serial.read()` kemudian mengambil satu karakter tersebut. Karakter akan dievaluasi untuk menambah (`+`), mengurangi (`-`), atau mereset (`r`) jumlah slot secara langsung (real-time) beserta validasi agar jumlah slot tidak melebihi batas maksimal maupun bernilai negatif. Fitur ini berguna untuk mengkoreksi error pembacaan jumlah kendaraan tanpa harus mematikan perangkat atau mengintervensi sensor secara fisik.
+
+---
 **LCD Output Contoh:**
 
 ```
@@ -489,6 +509,18 @@ Dibagi 2 karena suara pergi pulang
     │ - Buka Palang │   │
     │ - Sirine      │   │
     └───────────────┘   │
+                        │
+                  ┌─────▼─────────────────────────┐
+                  │ Cek Input Serial (Admin)      │
+                  │ - '+' (Tambah Slot)           │
+                  │ - '-' (Kurangi Slot)          │
+                  │ - 'r' (Reset ke Maksimal)     │
+                  └─────┬─────────────────────────┘
+                        │
+                  ┌─────▼─────────────────────────┐
+                  │ Cek Tombol Manual (Masuk &    │
+                  │ Keluar) dgn Delay Debouncing  │
+                  └─────┬─────────────────────────┘
                         │
                    ┌────▼──────────────────────┐
                    │ Cek Sensor Ultrasonik     │
