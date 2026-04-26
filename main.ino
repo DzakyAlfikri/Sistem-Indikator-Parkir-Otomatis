@@ -290,7 +290,7 @@ void loop(){                       // Fungsi utama loop() yang akan berjalan ber
   }
 
   // =========================
-  // FITUR BARU: UPDATE SLOT MANUAL VIA SERIAL
+  // UPDATE SLOT MANUAL VIA SERIAL
   // =========================
   if (Serial.available() > 0) {    // Memeriksa apakah ada data karakter yang dikirimkan oleh user dari laptop/PC
   char cmd = Serial.read();        // Membaca satu karakter pertama yang dikirim dan menyimpannya di variabel 'cmd'
